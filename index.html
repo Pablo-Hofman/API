@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requisição e resposta via API</title>
+</head>
+<body>
+    <h1>Requisição e Resposta via API</h1>
+    <button id="resposta">fetch</button>
+    <div id="requisicao"></div>
+    <script>
+         const requisicao = new Request('http://localhost:3000/produtos', {
+            method:'GET',
+            headers: {
+                'content-type':'application/json'
+            }
+        });
+        
+        document.querySelector('#resposta').addEventListener('click', () => {
+            fetch(requisicao)
+            .then(resposta => resposta.json())
+            //.then(resposta => JSON.strigify(resposta))   
+            //.then(resposta => JSON.parse(resposta))
+            .then(resposta => {
+                
+                const produto = `
+                <p>id:${resposta.id}</p>
+                <p>decrição:${resposta.descricao}</p>
+                <p>preco:${resposta.preco} </p>
+                `
+                
+                document.querySelector('#requisicao').innerHTML = produto
+            })
+        })
+     </script>
+</body>
+</html>
