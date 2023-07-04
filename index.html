@@ -20,17 +20,23 @@
         document.querySelector('#resposta').addEventListener('click', () => {
             fetch(requisicao)
             .then(resposta => resposta.json())
-            //.then(resposta => JSON.strigify(resposta))   
-            //.then(resposta => JSON.parse(resposta))
+            .then(resposta => JSON.stringify(resposta))   
+            .then(resposta => JSON.parse(resposta))
             .then(resposta => {
-                
-                const produto = `
-                <p>id:${resposta.id}</p>
-                <p>decrição:${resposta.descricao}</p>
-                <p>preco:${resposta.preco} </p>
-                `
-                
-                document.querySelector('#requisicao').innerHTML = produto
+
+                const div = document.createElement ("div");
+
+                for (let i = 0; i < length; i++) {
+ 
+                    const produto = `
+                    <p>id:${resposta[i].id}</p>
+                    <p>decrição:${resposta[i].descricao}</p>
+                    <p>preco:${resposta[i].preco}</p>
+                    `
+
+                    document.querySelector('#requisicao').appendChild 
+                    (div).innerHTML = produto;
+                }
             })
         })
      </script>
